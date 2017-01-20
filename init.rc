@@ -12,6 +12,7 @@ import /init.usb.rc
 import /init.${ro.hardware}.rc
 import /init.trace.rc
 import /init.carrier.rc
+import /init.container.rc
 
 on early-init
     # Set init and its forked children's oom_adj.
@@ -47,7 +48,6 @@ loglevel 3
 # Backward compatibility
     symlink /system/etc /etc
     symlink /sys/kernel/debug /d
-    symlink /storage/extSdCard /external_sd
 
 # Right now vendor lives on the same filesystem as system,
 # but someday that may change.
@@ -71,6 +71,7 @@ loglevel 3
     chown root system /sys/fs/cgroup/memory/sw/tasks
     chmod 0660 /sys/fs/cgroup/memory/sw/tasks
 
+    mkdir /.system
     mkdir /system
     mkdir /data 0771 system system
     mkdir /cache 0770 system cache
@@ -171,6 +172,8 @@ loglevel 3
     setprop installd.sdcard_manipulate_done 0
 
 on post-fs
+    # once everything is setup, no need to modify /
+    mount rootfs rootfs / ro remount
     # mount shared so changes propagate into child namespaces
     mount rootfs rootfs / shared rec
     mount tmpfs tmpfs /mnt/secure private rec
@@ -282,6 +285,7 @@ on post-fs-data
     mkdir /data/property 0700 root root
     mkdir /data/ssh 0750 root shell
     mkdir /data/ssh/empty 0700 root root
+    mkdir /data/tombstones 0771 system system
     mkdir /data/system 0775 system system
     mkdir /data/system/container 0700 system system
     restorecon -R /data/system
@@ -391,6 +395,7 @@ on post-fs-data
     mkdir /data/security/good 0700 system system
     mkdir /data/security/stig 0700 system system
     mkdir /data/security/mycontainer 0700 system system
+    mkdir /data/security/aasa 0711 system system
 
     # If there is no fs-post-data action in the init.<device>.rc file, you
     # must uncomment this line, otherwise encrypted filesystems
@@ -972,6 +977,7 @@ on boot
     chown system system /sys/fs/selinux/enforce
 
 # Permissions for Charging
+    chown media sdcard_rw /sys/class/power_supply/battery/store_mode
     chown system radio /sys/class/power_supply/battery/batt_reset_soc
     chown system radio /sys/class/power_supply/battery/update
     chown system radio /sys/class/power_supply/battery/factory_mode
@@ -1315,12 +1321,12 @@ service media /system/bin/mediaserver
 service apaservice /system/bin/apaservice
     class main
     user jack
-    group system inet sdcard_rw sdcard_r media_rw shell
+    group inet sdcard_rw sdcard_r media_rw shell
 
 service jackservice /system/bin/jackservice
     class main
     user jack
-    group system audio inet shell
+    group audio inet shell
 
 service powersnd /system/bin/samsungpowersoundplay
     class main
@@ -1342,12 +1348,6 @@ service installd /system/bin/installd
 service flash_recovery /system/etc/install-recovery.sh
     class main
     seclabel u:r:flash_recovery:s0
-    oneshot
-	
-service illusion /init.illusion.sh
-    class main
-    user root
-    group root
     oneshot
 
 service racoon /system/bin/racoon
