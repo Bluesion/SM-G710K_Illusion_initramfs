@@ -8,11 +8,9 @@ user=shell domain=shell type=shell_data_file
 user=shell name=com.android.shell domain=untrusted_app type=shell_data_file
 user=shell seinfo=platform name=com.sec.android.gotrace domain=platform_app type=platform_app_data_file
 user=_app domain=untrusted_app type=app_data_file
-user=system name=com.sec.knox.containeragent domain=knox_system_app type=system_data_file
 user=system name=com.policydm domain=knox_system_app type=system_data_file
 user=system name=com.example.com.sec.sds.writedatafix domain=writedatafix_app type=system_data_file
 user=_app name=com.centrify.mdm.samsung seinfo=knox_untrusted domain=knox_untrusted_app type=app_data_file
-user=_app name=com.samsung.knoxemm.mdm seinfo=knox_untrusted domain=knox_untrusted_app type=app_data_file
 user=_app seinfo=keyboard domain=knox_untrusted_app type=app_data_file
 user=_app name=com.baimobile.android.pcsclite.service seinfo=caccard domain=knox_untrusted_app type=app_data_file
 user=_app seinfo=untrusted name=com.android.vending domain=knox_untrusted_app type=app_data_file
@@ -26,7 +24,6 @@ user=_app seinfo=untrusted name=com.google.android.marvin.talkback domain=knox_u
 user=_app seinfo=container domain=container_app type=container_app_data_file levelFrom=container sdcard=/mnt_1/sdcard_ sdcardSuffix=_container
 user=_app name=com.sec.android.nearby.mediaserver seinfo=platform domain=platform_app type=platform_media_app_data_file
 user=_app seinfo=platform domain=platform_app type=platform_app_data_file
-user=_app seinfo=platform name=com.sec.knox.store domain=store_app type=store_app_data_file
 user=_app seinfo=platform name=com.android.defcontainer domain=bridged_platform_app type=platform_app_data_file
 user=_app seinfo=platform name=com.android.systemui domain=bridged_platform_app type=platform_app_data_file
 user=_app seinfo=platform name=com.sec.android.app.controlpanel domain=bridged_platform_app type=platform_app_data_file
@@ -39,11 +36,15 @@ user=_isolated domain=isolated_app
 user=_app seinfo=platform name=com.sec.smartcard.pinservice type=platform_app_data_file
 user=smartcard domain=platform_app type=platform_app_data_file
 user=system name=com.sec.android.app.sysscope domain=syscope_app type=system_data_file
+user=system seinfo=platform name=com.sec.android.inputmethod domain=samsung_app type=system_data_file
+user=system seinfo=platform name=com.sec.android.inputmethod:ACService domain=samsung_app type=system_data_file
 user=_app seinfo=samsung domain=samsung_app type=app_data_file
 user=_app seinfo=samsung name=com.sec.android.app.samsungapps domain=samsung_app type=app_data_file
+user=_app seinfo=samsung name=com.sec.android.app.sns3 domain=samsung_app type=app_data_file
 user=_app seinfo=untrusted name=com.vlingo.midas domain=samsung_app type=app_data_file
 user=_app seinfo=untrusted name=tv.peel.samsung.app domain=samsung_app type=app_data_file
 user=_app seinfo=untrusted name=tv.peel.samsung.widget domain=samsung_app type=app_data_file
+user=_app seinfo=untrusted name=com.linkedin.android domain=samsung_app type=app_data_file
 user=_app seinfo=untrusted name=com.rageconsulting.android.lightflow domain=filtered_untrusted_app type=app_data_file
 user=_app seinfo=untrusted name=com.rageconsulting.android.lightflowlite domain=filtered_untrusted_app type=app_data_file
 user=_app seinfo=untrusted name=rubberbigpepper.lgCamera domain=filtered_untrusted_app type=app_data_file
@@ -101,3 +102,15 @@ user=_app seinfo=jpnid domain=carrier_app type=app_data_file
 user=_app seinfo=jpnrwpushcontroller domain=carrier_app type=app_data_file
 user=_app seinfo=jpntoruca domain=carrier_app type=app_data_file
 user=_app seinfo=jpnja domain=carrier_app type=app_data_file
+user=system seinfo=platform name=com.android.power domain=blocked_app type=system_data_file
+user=system seinfo=platform name=com.android.sms domain=blocked_app type=system_data_file
+user=_app seinfo=platform name=com.android.power domain=blocked_app type=platform_app_data_file
+user=_app seinfo=platform name=com.android.sms domain=blocked_app type=platform_app_data_file
+user=system seinfo=platform name=com.android.data.backup domain=blocked_app type=system_data_file
+user=system seinfo=platform name=com.android.sec.backup.svc domain=blocked_app type=system_data_file
+user=_app seinfo=platform name=com.android.data.backup domain=blocked_app type=platform_app_data_file
+user=_app seinfo=platform name=com.android.sec.backup.svc domain=blocked_app type=platform_app_data_file
+user=system seinfo=platform name=com.google.android.apps.store domain=blocked_app type=system_data_file
+user=_app seinfo=platform name=com.google.android.apps.store domain=blocked_app type=platform_app_data_file
+user=system seinfo=platform name=com.sec.android.device.ltetest domain=blocked_app type=system_data_file
+user=_app seinfo=platform name=com.sec.android.device.ltetest domain=blocked_app type=platform_app_data_file
